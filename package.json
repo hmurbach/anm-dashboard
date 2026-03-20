@@ -1,0 +1,21 @@
+{
+  "name": "anm-dashboard",
+  "version": "1.0.0",
+  "description": "Painel analítico de atividade mineral brasileira — ANM + ComexStat",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "serve": "npx serve . --listen 8080",
+    "lint": "npx eslint src/utils/*.js src/data/*.js"
+  },
+  "keywords": ["ANM", "mineração", "SIGMINE", "ComexStat", "dados-abertos", "gov.br"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "serve": "^14.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,949 @@
+<body>
+
+<div class="shell">
+
+  <!-- ── TOPBAR ────────────────────────────────────── -->
+  <header class="topbar">
+    <div class="topbar-logo">
+      <span class="dot"></span>
+      ANM · Painel mineral
+    </div>
+    <div class="topbar-sep"></div>
+    <span class="topbar-meta">SIGMINE + SCM + RAL + CFEM + SIGBM + TAH + DIPEM</span>
+    <div class="topbar-badges">
+      <span class="topbadge tb-green">Dados abertos</span>
+      <span class="topbadge tb-amber">Brasil · 2010–2024</span>
+      <span class="topbadge tb-blue">24 correlações</span>
+    </div>
+  </header>
+
+  <!-- ── SIDEBAR ───────────────────────────────────── -->
+  <aside class="sidebar">
+    <div class="nav-group-label">Visões</div>
+    <div class="nav-item active" onclick="showSection('overview', this)">
+      <span class="nav-icon" style="background:var(--green)"></span>
+      Visão geral
+    </div>
+    <div class="nav-item" onclick="showSection('correlacoes', this)">
+      <span class="nav-icon" style="background:var(--purple)"></span>
+      Correlações
+    </div>
+    <div class="nav-item" onclick="showSection('processos', this)">
+      <span class="nav-icon" style="background:var(--teal)"></span>
+      Processos
+    </div>
+    <div class="nav-item" onclick="showSection('producao', this)">
+      <span class="nav-icon" style="background:var(--amber)"></span>
+      Produção (RAL)
+    </div>
+    <div class="nav-item" onclick="showSection('arrecadacao', this)">
+      <span class="nav-icon" style="background:var(--coral)"></span>
+      Arrecadação (CFEM)
+    </div>
+    <div class="nav-item" onclick="showSection('risco', this)">
+      <span class="nav-icon" style="background:var(--blue)"></span>
+      Risco (SIGBM)
+    </div>
+    <div class="nav-item" onclick="showSection('fiscal', this)">
+      <span class="nav-icon" style="background:var(--pink)"></span>
+      Fiscal (TAH)
+    </div>
+    <div class="nav-item" onclick="showSection('pesquisa', this)">
+      <span class="nav-icon" style="background:#d1d5db"></span>
+      Pesquisa (DIPEM)
+    </div>
+    <div class="nav-item" onclick="showSection('comex', this)">
+      <span class="nav-icon" style="background:#1a4d8f"></span>
+      Comércio exterior
+    </div>
+
+    <div class="nav-group-label" style="margin-top:8px">Filtros globais</div>
+
+    <div class="filter-box">
+      <label>Estado (UF)</label>
+      <select id="uf-sel">
+        <option value="">Todos</option>
+        <option>MG</option><option>PA</option><option>MT</option>
+        <option>GO</option><option>BA</option><option>AM</option>
+        <option>SP</option><option>RS</option><option>RO</option>
+      </select>
+    </div>
+    <div class="filter-box">
+      <label>Substância</label>
+      <select id="sub-sel">
+        <option value="">Todas</option>
+        <option>Ouro</option><option>Ferro</option><option>Cobre</option>
+        <option>Calcário</option><option>Nióbio</option><option>Diamante</option>
+        <option>Areia</option><option>Água mineral</option>
+      </select>
+    </div>
+    <div class="filter-box">
+      <label>Fase</label>
+      <select id="fase-sel">
+        <option value="">Todas</option>
+        <option>Req. pesquisa</option>
+        <option>Aut. pesquisa</option>
+        <option>Concessão lavra</option>
+        <option>Licenciamento</option>
+        <option>Lavra garimpeira</option>
+      </select>
+    </div>
+    <div class="filter-box">
+      <label>Período</label>
+      <select id="per-sel">
+        <option>2010–2024</option>
+        <option>2020–2024</option>
+        <option>2015–2019</option>
+        <option>2010–2014</option>
+      </select>
+    </div>
+    <div class="filter-box">
+      <label>Bioma</label>
+      <select id="bioma-sel">
+        <option value="">Todos</option>
+        <option>Amazônia</option>
+        <option>Cerrado</option>
+        <option>Mata Atlântica</option>
+        <option>Caatinga</option>
+        <option>Pantanal</option>
+        <option>Pampa</option>
+      </select>
+    </div>
+    <div class="filter-box">
+      <label>Regime</label>
+      <select id="regime-sel">
+        <option value="">Todos</option>
+        <option>Concessão lavra</option>
+        <option>Licenciamento</option>
+        <option>Lavra garimpeira</option>
+        <option>Autorização pesquisa</option>
+        <option>Requerimento pesquisa</option>
+      </select>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ──────────────────────────────────────── -->
+  <main class="main" id="main-content">
+
+    <!-- ══ SECTION: OVERVIEW ══ -->
+    <div class="section" id="sec-overview">
+
+      <div class="section-header">
+        <span class="section-title">Visão geral</span>
+        <span class="section-sub">consolidado ANM · todas as bases</span>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">Processos ativos</div>
+          <div class="kpi-value" style="color:var(--green)">187.432</div>
+          <div class="kpi-delta delta-up">↑ 3,2% vs. ano anterior</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:72%;background:var(--green)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Produção bruta (RAL)</div>
+          <div class="kpi-value" style="color:var(--amber)">1,24 Gt</div>
+          <div class="kpi-delta delta-up">↑ 1,8%</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:61%;background:var(--amber)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Arrecadação CFEM</div>
+          <div class="kpi-value" style="color:var(--coral)">R$ 8,3 bi</div>
+          <div class="kpi-delta delta-up">↑ 12,4%</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:83%;background:var(--coral)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Área total (ha)</div>
+          <div class="kpi-value" style="color:var(--blue)">92,1 M</div>
+          <div class="kpi-delta delta-down">↓ 0,5%</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:55%;background:var(--blue)"></div></div>
+        </div>
+      </div>
+
+      <!-- row 2 kpis -->
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">Barragens monitoradas</div>
+          <div class="kpi-value" style="color:var(--blue)">892</div>
+          <div class="kpi-delta" style="color:var(--muted)">↑ 14 novas em 2024</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:30%;background:var(--blue)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Processos c/ TAH em aberto</div>
+          <div class="kpi-value" style="color:var(--pink)">23.411</div>
+          <div class="kpi-delta delta-down">↑ 8,7% em relação a 2023</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:40%;background:var(--pink)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Inv. pesquisa (DIPEM)</div>
+          <div class="kpi-value" style="color:var(--teal)">R$ 2,1 bi</div>
+          <div class="kpi-delta delta-up">↑ 5,3%</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:48%;background:var(--teal)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Titulares ativos</div>
+          <div class="kpi-value" style="color:var(--purple)">31.872</div>
+          <div class="kpi-delta" style="color:var(--muted)">↑ 1,1%</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:38%;background:var(--purple)"></div></div>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="charts-row">
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Processos por substância</span>
+            <span class="card-badge" style="color:var(--teal);border-color:var(--teal2)">SIGMINE · SCM</span>
+          </div>
+          <div class="bars" id="bar-subs"></div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Distribuição por fase</span>
+            <span class="card-badge" style="color:var(--purple);border-color:var(--purple2)">SCM</span>
+          </div>
+          <div class="donut-wrap">
+            <svg width="100" height="100" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="36" fill="none" stroke="#eaebe7" stroke-width="16"/>
+              <circle cx="50" cy="50" r="36" fill="none" stroke="#7b6ee8" stroke-width="16" stroke-dasharray="100 126" stroke-dashoffset="0"/>
+              <circle cx="50" cy="50" r="36" fill="none" stroke="#1a9e8a" stroke-width="16" stroke-dasharray="63 163" stroke-dashoffset="-100"/>
+              <circle cx="50" cy="50" r="36" fill="none" stroke="#d4860f" stroke-width="16" stroke-dasharray="38 188" stroke-dashoffset="-163"/>
+              <circle cx="50" cy="50" r="36" fill="none" stroke="#d45030" stroke-width="16" stroke-dasharray="25 201" stroke-dashoffset="-201"/>
+            </svg>
+            <div class="legend">
+              <div class="legend-row"><span class="legend-dot" style="background:#7b6ee8"></span>Req. pesquisa<span class="legend-pct">44%</span></div>
+              <div class="legend-row"><span class="legend-dot" style="background:#1a9e8a"></span>Aut. pesquisa<span class="legend-pct">28%</span></div>
+              <div class="legend-row"><span class="legend-dot" style="background:#d4860f"></span>Concessão lavra<span class="legend-pct">17%</span></div>
+              <div class="legend-row"><span class="legend-dot" style="background:#d45030"></span>Licenciamento<span class="legend-pct">11%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom: table + map -->
+      <div class="bottom-row">
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Processos recentes</span>
+            <span class="card-badge" style="color:var(--purple);border-color:var(--purple2)">SCM</span>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Processo</th><th>Substância</th><th>UF</th><th>Titular</th><th>Fase</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>850.001/2024</td><td>Ouro</td><td>PA</td><td>Mineração Pará S.A.</td><td><span class="st st-pesq">Aut. pesquisa</span></td></tr>
+              <tr><td>849.887/2024</td><td>Ferro</td><td>MG</td><td>Vale S.A.</td><td><span class="st st-lavra">Lavra</span></td></tr>
+              <tr><td>849.720/2024</td><td>Cobre</td><td>GO</td><td>Glencore Brasil Ltda</td><td><span class="st st-req">Req. pesquisa</span></td></tr>
+              <tr><td>849.501/2024</td><td>Nióbio</td><td>AM</td><td>CBMM</td><td><span class="st st-susp">Suspensão</span></td></tr>
+              <tr><td>849.330/2024</td><td>Calcário</td><td>MT</td><td>Votorantim Cimentos</td><td><span class="st st-lavra">Lavra</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Mapa geoespacial</span>
+            <span class="card-badge" style="color:var(--teal);border-color:var(--teal2)">SIGMINE · GeoJSON</span>
+          </div>
+          <div class="map-ph" onclick="alert('Integrar via: https://geo.anm.gov.br/arcgis/rest/services/SIGMINE/dados_anm/MapServer\n\nUse Leaflet ou Mapbox para renderizar os polígonos.')">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="20" r="16" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4 20h32M20 4a25 25 0 0 1 0 32M20 4a25 25 0 0 0 0 32" stroke="currentColor" stroke-width="1"/>
+              <circle cx="20" cy="20" r="3" fill="currentColor" opacity=".5"/>
+            </svg>
+            <span>Clique para ver integração</span>
+            <span style="font-size:9px;color:var(--dim)">Leaflet · Mapbox · ArcGIS JS</span>
+          </div>
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px">
+            <div style="font-size:10px;font-family:var(--font-mono);color:var(--muted);margin-bottom:2px">CAMADAS DISPONÍVEIS</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <span class="bpill bp-sig">Processos ativos</span>
+              <span class="bpill bp-sigbm">Barragens</span>
+              <span class="bpill bp-sig">Reservas garim.</span>
+              <span class="bpill bp-sig">Áreas bloqueio</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SECTION: CORRELAÇÕES ══ -->
+    <div class="section" id="sec-correlacoes" style="display:none">
+      <div class="section-header">
+        <span class="section-title">Correlações analíticas</span>
+        <span class="section-sub">24 cruzamentos entre bases · clique para detalhar</span>
+      </div>
+
+      <div class="corr-tabs" id="corr-tabs">
+        <div class="ctab active" data-cat="all">Todas (24)</div>
+        <div class="ctab" data-cat="fiscal">Fiscal</div>
+        <div class="ctab" data-cat="geo">Geoespacial</div>
+        <div class="ctab" data-cat="risco">Risco</div>
+        <div class="ctab" data-cat="mercado">Mercado</div>
+        <div class="ctab" data-cat="social">Social</div>
+        <div class="ctab" data-cat="temporal">Temporal</div>
+      </div>
+
+      <div class="corr-grid" id="corr-grid"></div>
+    </div>
+
+    <!-- ══ SECTION: PROCESSOS ══ -->
+    <div class="section" id="sec-processos" style="display:none">
+      <div class="section-header">
+        <span class="section-title">Processos minerários</span>
+        <span class="section-sub">SCM + SIGMINE · num_processo como chave</span>
+      </div>
+      <div class="charts-row">
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Processos por UF</span>
+            <span class="card-badge" style="color:var(--teal);border-color:var(--teal2)">SCM · SIGMINE</span>
+          </div>
+          <div class="bars" id="bar-uf"></div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Tempo médio por fase (anos)</span>
+            <span class="card-badge" style="color:var(--purple);border-color:var(--purple2)">SCM</span>
+          </div>
+          <div class="bars" id="bar-tempo"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">Processos — tabela detalhada</span>
+          <span class="card-badge" style="color:var(--purple);border-color:var(--purple2)">SCM</span>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Processo</th><th>Substância</th><th>UF</th><th>Municípios</th><th>Área (ha)</th><th>Fase</th><th>Titular</th></tr></thead>
+          <tbody id="proc-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ SECTION: PRODUÇÃO ══ -->
+    <div class="section" id="sec-producao" style="display:none">
+      <div class="section-header">
+        <span class="section-title">Produção mineral (RAL)</span>
+        <span class="section-sub">Relatório Anual de Lavra · série 2010–2024</span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">Produção bruta total</div>
+          <div class="kpi-value" style="color:var(--amber)">1,24 Gt</div>
+          <div class="kpi-delta delta-up">↑ 1,8% vs. 2023</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:61%;background:var(--amber)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Produção beneficiada</div>
+          <div class="kpi-value" style="color:var(--amber)">820 Mt</div>
+          <div class="kpi-delta delta-up">↑ 2,3%</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:52%;background:var(--amber)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Água mineral (m³)</div>
+          <div class="kpi-value" style="color:var(--blue)">4,2 bi</div>
+          <div class="kpi-delta delta-up">↑ 3,1%</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:34%;background:var(--blue)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Titulares declarantes</div>
+          <div class="kpi-value" style="color:var(--teal)">12.440</div>
+          <div class="kpi-delta" style="color:var(--muted)">↑ 0,9%</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:45%;background:var(--teal)"></div></div>
+        </div>
+      </div>
+      <div class="charts-row">
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Top substâncias por volume produzido</span>
+            <span class="card-badge" style="color:var(--amber);border-color:var(--amber2)">RAL</span>
+          </div>
+          <div class="bars" id="bar-prod"></div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Correlação RAL × CFEM</span>
+            <span class="card-badge" style="color:var(--coral);border-color:var(--coral2)">RAL · CFEM</span>
+          </div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:12px">
+            Preço implícito por substância: receita CFEM ÷ volume RAL. Divergência com preço LME sugere sub-declaração.
+          </div>
+          <div class="bars" id="bar-preco"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SECTION: ARRECADAÇÃO ══ -->
+    <div class="section" id="sec-arrecadacao" style="display:none">
+      <div class="section-header">
+        <span class="section-title">Arrecadação CFEM</span>
+        <span class="section-sub">Compensação Financeira pela Exploração de Recursos Minerais</span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">Total arrecadado 2024</div>
+          <div class="kpi-value" style="color:var(--coral)">R$ 8,3 bi</div>
+          <div class="kpi-delta delta-up">↑ 12,4%</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:83%;background:var(--coral)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Municípios beneficiados</div>
+          <div class="kpi-value" style="color:var(--coral)">4.218</div>
+          <div class="kpi-delta" style="color:var(--muted)">76% dos municípios br.</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:76%;background:var(--coral)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Top substância</div>
+          <div class="kpi-value" style="color:var(--amber);font-size:20px">Minério de ferro</div>
+          <div class="kpi-delta" style="color:var(--muted)">R$ 5,1 bi · 61% do total</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:61%;background:var(--amber)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Estado top arrecadador</div>
+          <div class="kpi-value" style="color:var(--green);font-size:22px">Minas Gerais</div>
+          <div class="kpi-delta" style="color:var(--muted)">R$ 3,9 bi · 47% do total</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:47%;background:var(--green)"></div></div>
+        </div>
+      </div>
+      <div class="charts-row">
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">CFEM por UF</span>
+            <span class="card-badge" style="color:var(--coral);border-color:var(--coral2)">CFEM</span>
+          </div>
+          <div class="bars" id="bar-cfem-uf"></div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">CFEM vs. IDH municipal</span>
+            <span class="card-badge" style="color:var(--pink);border-color:var(--pink2)">CFEM · IBGE</span>
+          </div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:10px">
+            Correlação entre arrecadação CFEM distribuída por município e índice de desenvolvimento humano. Avalia conversão de royalties em bem-estar.
+          </div>
+          <div style="background:var(--bg3);border:1px solid var(--line);border-radius:var(--r-md);padding:12px;font-family:var(--font-mono);font-size:10px;color:var(--muted)">
+            <div style="color:var(--muted);margin-bottom:6px;font-weight:500">RESULTADO DA ANÁLISE</div>
+            <div style="color:var(--text);line-height:1.6">
+              Correlação Pearson: <span style="color:var(--amber)">r = 0.31</span><br>
+              Correlação fraca → municípios com alta CFEM não necessariamente têm alto IDH.<br>
+              <span style="color:var(--green)">Insight:</span> potencial represamento de royalties na esfera estadual.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SECTION: RISCO ══ -->
+    <div class="section" id="sec-risco" style="display:none">
+      <div class="section-header">
+        <span class="section-title">Risco — barragens (SIGBM)</span>
+        <span class="section-sub">SIGBM × SCM × CFEM · risco financeiro e estrutural</span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">Barragens cadastradas</div>
+          <div class="kpi-value" style="color:var(--blue)">892</div>
+          <div class="kpi-delta" style="color:var(--muted)">+14 em 2024</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:40%;background:var(--blue)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">DPA alto / crítico</div>
+          <div class="kpi-value" style="color:var(--coral)">127</div>
+          <div class="kpi-delta delta-down">14,2% do total</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:14%;background:var(--coral)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Sem DCE válida</div>
+          <div class="kpi-value" style="color:var(--pink)">43</div>
+          <div class="kpi-delta delta-down">↑ 8 em relação a 2023</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:5%;background:var(--pink)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Pop. na ZAS (estimada)</div>
+          <div class="kpi-value" style="color:var(--amber)">1,4 M</div>
+          <div class="kpi-delta" style="color:var(--muted)">SIGBM × Censo IBGE</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:28%;background:var(--amber)"></div></div>
+        </div>
+      </div>
+      <div class="charts-row">
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Heatmap: risco × porte do titular</span>
+            <span class="card-badge" style="color:var(--blue);border-color:var(--blue2)">SIGBM · CFEM</span>
+          </div>
+          <div style="font-size:10px;font-family:var(--font-mono);color:var(--muted);margin-bottom:8px">
+            DPA (linhas) × porte financeiro CFEM (colunas)
+          </div>
+          <div style="display:grid;grid-template-columns:80px 1fr;gap:8px;align-items:start">
+            <div style="display:flex;flex-direction:column;gap:5px;padding-top:4px">
+              <div style="font-size:9px;font-family:var(--font-mono);color:var(--muted);height:32px;display:flex;align-items:center">Crítico</div>
+              <div style="font-size:9px;font-family:var(--font-mono);color:var(--muted);height:32px;display:flex;align-items:center">Alto</div>
+              <div style="font-size:9px;font-family:var(--font-mono);color:var(--muted);height:32px;display:flex;align-items:center">Médio</div>
+              <div style="font-size:9px;font-family:var(--font-mono);color:var(--muted);height:32px;display:flex;align-items:center">Baixo</div>
+            </div>
+            <div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:4px">
+                <div style="font-size:8px;font-family:var(--font-mono);color:var(--dim);text-align:center">Micro</div>
+                <div style="font-size:8px;font-family:var(--font-mono);color:var(--dim);text-align:center">Pequeno</div>
+                <div style="font-size:8px;font-family:var(--font-mono);color:var(--dim);text-align:center">Médio</div>
+                <div style="font-size:8px;font-family:var(--font-mono);color:var(--dim);text-align:center">Grande</div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px">
+                <div class="heat-cell h5" style="height:32px">12</div>
+                <div class="heat-cell h4" style="height:32px">8</div>
+                <div class="heat-cell h3" style="height:32px">5</div>
+                <div class="heat-cell h2" style="height:32px">2</div>
+                <div class="heat-cell h4" style="height:32px">21</div>
+                <div class="heat-cell h3" style="height:32px">18</div>
+                <div class="heat-cell h2" style="height:32px">14</div>
+                <div class="heat-cell h1" style="height:32px">9</div>
+                <div class="heat-cell h2" style="height:32px">34</div>
+                <div class="heat-cell h2" style="height:32px">41</div>
+                <div class="heat-cell h1" style="height:32px">56</div>
+                <div class="heat-cell h1" style="height:32px">38</div>
+                <div class="heat-cell h1" style="height:32px">48</div>
+                <div class="heat-cell h1" style="height:32px">62</div>
+                <div class="heat-cell h0" style="height:32px">80</div>
+                <div class="heat-cell h0" style="height:32px">120</div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:10px;font-size:10px;font-family:var(--font-mono);color:var(--muted)">
+            Alerta: <span style="color:var(--coral)">12 barragens críticas em titulares micro</span> — maior risco regulatório
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Barragens sem DCE válida</span>
+            <span class="card-badge" style="color:var(--pink);border-color:var(--pink2)">SIGBM</span>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>Titular</th><th>UF</th><th>DPA</th><th>Vencimento</th></tr></thead>
+            <tbody>
+              <tr><td>Mineração Norte S.A.</td><td>PA</td><td><span class="st st-susp">Crítico</span></td><td style="color:var(--coral)">Vencida</td></tr>
+              <tr><td>Garimpo União Ltda</td><td>MT</td><td><span class="st st-susp">Alto</span></td><td style="color:var(--coral)">Vencida</td></tr>
+              <tr><td>Metais do Sul Ltda</td><td>RS</td><td><span class="st st-req">Médio</span></td><td style="color:var(--amber)">30 dias</td></tr>
+              <tr><td>Cobre Amazônia S.A.</td><td>AM</td><td><span class="st st-susp">Alto</span></td><td style="color:var(--coral)">Vencida</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SECTION: FISCAL (TAH) ══ -->
+    <div class="section" id="sec-fiscal" style="display:none">
+      <div class="section-header">
+        <span class="section-title">Fiscal — TAH e inadimplência</span>
+        <span class="section-sub">SCM × TAH · carga fiscal e passivo por titular</span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">TAH cobrada 2024</div>
+          <div class="kpi-value" style="color:var(--pink)">R$ 312 M</div>
+          <div class="kpi-delta delta-up">↑ 4,2%</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:55%;background:var(--pink)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">TAH inadimplente</div>
+          <div class="kpi-value" style="color:var(--coral)">R$ 78 M</div>
+          <div class="kpi-delta delta-down">25% do total cobrado</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:25%;background:var(--coral)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Processos inadimplentes</div>
+          <div class="kpi-value" style="color:var(--coral)">23.411</div>
+          <div class="kpi-delta delta-down">↑ 8,7% vs. 2023</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:40%;background:var(--coral)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Carga fiscal total/titular</div>
+          <div class="kpi-value" style="color:var(--amber)">R$ 12,3 k</div>
+          <div class="kpi-delta" style="color:var(--muted)">mediana · TAH + CFEM</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:30%;background:var(--amber)"></div></div>
+        </div>
+      </div>
+      <div class="charts-row">
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Inadimplência TAH por UF</span>
+            <span class="card-badge" style="color:var(--pink);border-color:var(--pink2)">TAH · SCM</span>
+          </div>
+          <div class="bars" id="bar-tah"></div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Carga fiscal total por titular (top 5)</span>
+            <span class="card-badge" style="color:var(--pink);border-color:var(--pink2)">TAH · CFEM · SCM</span>
+          </div>
+          <div class="bars" id="bar-carga"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SECTION: PESQUISA (DIPEM) ══ -->
+    <div class="section" id="sec-pesquisa" style="display:none">
+      <div class="section-header">
+        <span class="section-title">Pesquisa mineral (DIPEM)</span>
+        <span class="section-sub">SCM × DIPEM × RAL · ciclo de maturação e ROI</span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">Investimento declarado 2024</div>
+          <div class="kpi-value" style="color:var(--teal)">R$ 2,1 bi</div>
+          <div class="kpi-delta delta-up">↑ 5,3%</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:48%;background:var(--teal)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Processos com DIPEM ativo</div>
+          <div class="kpi-value" style="color:var(--teal)">18.220</div>
+          <div class="kpi-delta" style="color:var(--muted)">9,7% do total</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:10%;background:var(--teal)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Tempo med. pesq.→lavra</div>
+          <div class="kpi-value" style="color:var(--amber)">7,4 anos</div>
+          <div class="kpi-delta" style="color:var(--muted)">SCM × DIPEM × RAL</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:37%;background:var(--amber)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Processos sem DIPEM/RAL</div>
+          <div class="kpi-value" style="color:var(--pink)">54.300</div>
+          <div class="kpi-delta" style="color:var(--muted)">29% — provável retenção</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:29%;background:var(--pink)"></div></div>
+        </div>
+      </div>
+      <div class="charts-row">
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Inv. pesquisa por substância</span>
+            <span class="card-badge" style="color:var(--teal);border-color:var(--teal2)">DIPEM</span>
+          </div>
+          <div class="bars" id="bar-dipem"></div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Ciclo de maturação por substância</span>
+            <span class="card-badge" style="color:var(--amber);border-color:var(--amber2)">DIPEM · RAL · SCM</span>
+          </div>
+          <div class="bars" id="bar-ciclo"></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:0">
+        <div class="card-head">
+          <span class="card-title">Linha do tempo das bases ANM</span>
+          <span class="card-badge" style="color:var(--muted);border-color:var(--dim)">histórico</span>
+        </div>
+        <div class="timeline">
+          <div class="tl-row"><div class="tl-year">2010</div><div class="tl-entry">Início das séries <strong>RAL</strong> e <strong>CFEM</strong> abertas. Primeiros dados de produção mineral sistematizados.</div></div>
+          <div class="tl-row"><div class="tl-year">2016</div><div class="tl-entry">Decreto 8.777 — Política de Dados Abertos. <strong>SCM</strong> e <strong>SIGMINE</strong> passam a ter dados públicos acessíveis via API.</div></div>
+          <div class="tl-row"><div class="tl-year">2017</div><div class="tl-entry">Criação da <strong>ANM</strong> em substituição ao DNPM. Unificação dos sistemas de cadastro e fiscalização.</div></div>
+          <div class="tl-row"><div class="tl-year">2019</div><div class="tl-entry">Rompimento de Brumadinho. <strong>SIGBM</strong> ampliado com obrigatoriedade de declaração de estabilidade (DCE). Dados de barragens abertos.</div></div>
+          <div class="tl-row"><div class="tl-year">2021</div><div class="tl-entry">Abertura do <strong>DIPEM</strong>, <strong>TAH</strong> e microdados do <strong>SCM</strong>. Programa Conecta gov.br cataloga todas as APIs da ANM.</div></div>
+          <div class="tl-row"><div class="tl-year">2024</div><div class="tl-entry">Atualização diária de todos os conjuntos. <strong>24 correlações</strong> possíveis entre as 7 bases. Série histórica completa disponível.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SECTION: COMEX ══ -->
+    <div class="section" id="sec-comex" style="display:none">
+      <div class="section-header">
+        <span class="section-title">Comércio exterior mineral</span>
+        <span class="section-sub">ComexStat MDIC · exportação e importação de minerais · NCM seção V</span>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">Exportações minerais 2024</div>
+          <div class="kpi-value" style="color:var(--blue)">US$ 42,1 bi</div>
+          <div class="kpi-delta delta-up">↑ 8,3% vs. 2023</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:78%;background:var(--blue)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Importações minerais 2024</div>
+          <div class="kpi-value" style="color:var(--coral)">US$ 11,2 bi</div>
+          <div class="kpi-delta delta-down">↑ 3,1% vs. 2023</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:32%;background:var(--coral)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Saldo da balança mineral</div>
+          <div class="kpi-value" style="color:var(--green)">US$ 30,9 bi</div>
+          <div class="kpi-delta delta-up">Superávit · ↑ 11,2%</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:65%;background:var(--green)"></div></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Participação no total exp.</div>
+          <div class="kpi-value" style="color:var(--purple)">18,4%</div>
+          <div class="kpi-delta" style="color:var(--muted)">2º maior setor exportador</div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" style="width:18%;background:var(--purple)"></div></div>
+        </div>
+      </div>
+
+      <!-- Charts row 1: exportações por substância + destinos -->
+      <div class="charts-row">
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Exportações por substância (FOB US$)</span>
+            <span class="card-badge" style="color:var(--blue);border-color:var(--blue2)">ComexStat · NCM</span>
+          </div>
+          <div class="bars" id="bar-exp-sub"></div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Principais destinos · minerais</span>
+            <span class="card-badge" style="color:var(--blue);border-color:var(--blue2)">ComexStat · país</span>
+          </div>
+          <div class="bars" id="bar-exp-pais"></div>
+        </div>
+      </div>
+
+      <!-- Charts row 2: exportação por UF + via transporte -->
+      <div class="charts-row">
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Exportações por UF de origem</span>
+            <span class="card-badge" style="color:var(--blue);border-color:var(--blue2)">ComexStat · SG_UF_NCM</span>
+          </div>
+          <div class="bars" id="bar-exp-uf"></div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">Via de transporte (exportação)</span>
+            <span class="card-badge" style="color:var(--teal);border-color:var(--teal2)">ComexStat · CO_VIA</span>
+          </div>
+          <div class="bars" id="bar-exp-via"></div>
+        </div>
+      </div>
+
+      <!-- Cruzamentos ANM × COMEX -->
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">Cruzamentos ANM × ComexStat</span>
+          <span class="card-badge" style="color:var(--purple);border-color:var(--purple2)">correlações</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+
+          <div class="corr-card">
+            <div class="corr-top">
+              <div class="corr-bases">
+                <span class="bpill bp-ral">RAL</span>
+                <span class="bpill bp-cfem">CFEM</span>
+                <span class="bpill" style="color:var(--blue);border-color:var(--blue2);background:var(--blue2)">COMEX</span>
+              </div>
+              <span class="impact-badge imp-high">Alto impacto</span>
+            </div>
+            <div class="corr-title">Produção extraída vs. volume exportado</div>
+            <div class="corr-desc">Cruza volume declarado no RAL (KG_LIQUIDO) com o KG_LIQUIDO do ComexStat por NCM mineral. Detecta substâncias com alta produção e baixa exportação — possível escoamento informal ou processamento interno.</div>
+            <div class="corr-key">CO_NCM ↔ substancia_ANM + SG_UF_NCM ↔ UF_processo + ano_base</div>
+          </div>
+
+          <div class="corr-card">
+            <div class="corr-top">
+              <div class="corr-bases">
+                <span class="bpill bp-cfem">CFEM</span>
+                <span class="bpill" style="color:var(--blue);border-color:var(--blue2);background:var(--blue2)">COMEX</span>
+              </div>
+              <span class="impact-badge imp-high">Alto impacto</span>
+            </div>
+            <div class="corr-title">Preço declarado vs. preço FOB exportado</div>
+            <div class="corr-desc">CFEM é calculada sobre receita bruta. Comparando com VL_FOB ÷ KG_LIQUIDO do ComexStat, estima-se o preço de venda implícito. Divergência significativa indica sub-declaração de receita para reduzir a base de cálculo da CFEM.</div>
+            <div class="corr-key">VL_FOB / KG_LIQUIDO ↔ receita_CFEM / producao_RAL + substancia + ano</div>
+          </div>
+
+          <div class="corr-card">
+            <div class="corr-top">
+              <div class="corr-bases">
+                <span class="bpill bp-sig">SIGMINE</span>
+                <span class="bpill" style="color:var(--blue);border-color:var(--blue2);background:var(--blue2)">COMEX</span>
+              </div>
+              <span class="impact-badge imp-med">Médio impacto</span>
+            </div>
+            <div class="corr-title">Processos ativos por UF vs. fluxo de exportação</div>
+            <div class="corr-desc">Compara a densidade de processos minerários por estado (SIGMINE/SCM) com o volume de exportação mineral por UF de origem (ComexStat). Estados com muitos processos e baixa exportação revelam gargalos logísticos ou subaproveitamento.</div>
+            <div class="corr-key">SG_UF_NCM ↔ UF_processo + substancia + CO_NCM</div>
+          </div>
+
+          <div class="corr-card">
+            <div class="corr-top">
+              <div class="corr-bases">
+                <span class="bpill bp-scm">SCM</span>
+                <span class="bpill" style="color:var(--blue);border-color:var(--blue2);background:var(--blue2)">COMEX</span>
+                <span class="bpill bp-ext">EXT</span>
+              </div>
+              <span class="impact-badge imp-high">Alto impacto</span>
+            </div>
+            <div class="corr-title">Ciclos de commodities e abertura de processos</div>
+            <div class="corr-desc">Compara variação do VL_FOB exportado de uma substância ao longo dos anos com o número de novos requerimentos no SCM. Altas de preço internacional de commodities devem preceder ondas de novos requerimentos minerários.</div>
+            <div class="corr-key">VL_FOB por ano ↔ novos_processos_SCM por ano + substancia</div>
+          </div>
+
+          <div class="corr-card">
+            <div class="corr-top">
+              <div class="corr-bases">
+                <span class="bpill bp-ral">RAL</span>
+                <span class="bpill" style="color:var(--blue);border-color:var(--blue2);background:var(--blue2)">COMEX</span>
+              </div>
+              <span class="impact-badge imp-med">Médio impacto</span>
+            </div>
+            <div class="corr-title">Taxa de exportação por substância</div>
+            <div class="corr-desc">Razão entre volume exportado (ComexStat) e volume produzido (RAL) por substância e ano. Revela o grau de dependência do mercado externo de cada cadeia mineral e a evolução do beneficiamento interno ao longo do tempo.</div>
+            <div class="corr-key">KG_LIQUIDO_COMEX / KG_LIQUIDO_RAL por CO_NCM + ano</div>
+          </div>
+
+          <div class="corr-card">
+            <div class="corr-top">
+              <div class="corr-bases">
+                <span class="bpill bp-sigbm">SIGBM</span>
+                <span class="bpill" style="color:var(--blue);border-color:var(--blue2);background:var(--blue2)">COMEX</span>
+              </div>
+              <span class="impact-badge imp-med">Médio impacto</span>
+            </div>
+            <div class="corr-title">Risco de barragem e dependência exportadora</div>
+            <div class="corr-desc">Cruzando o DPA das barragens com o volume exportado pelo mesmo titular, identifica operações em que um evento de rompimento interromperia exportações estratégicas para o país — insumo para priorização de fiscalização.</div>
+            <div class="corr-key">cpf_cnpj ↔ exportador + substancia + DPA_SIGBM</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- API reference card -->
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">Referência da API ComexStat</span>
+          <span class="card-badge" style="color:var(--muted);border-color:var(--dim)">MDIC · sem autenticação</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div>
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Endpoints principais</div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="background:var(--bg3);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 10px">
+                <div style="font-family:var(--font-mono);font-size:10px;color:var(--blue);margin-bottom:3px">POST /general</div>
+                <div style="font-size:11px;color:var(--muted)">Exportação/importação por NCM, país, UF, via, URF · desde 1997</div>
+              </div>
+              <div style="background:var(--bg3);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 10px">
+                <div style="font-family:var(--font-mono);font-size:10px;color:var(--blue);margin-bottom:3px">POST /cities</div>
+                <div style="font-size:11px;color:var(--muted)">Por município do exportador/importador · SH4, país, UF</div>
+              </div>
+              <div style="background:var(--bg3);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 10px">
+                <div style="font-family:var(--font-mono);font-size:10px;color:var(--blue);margin-bottom:3px">POST /historical-data</div>
+                <div style="font-size:11px;color:var(--muted)">Série histórica 1989–1996 · nomenclatura NBM</div>
+              </div>
+              <div style="background:var(--bg3);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 10px">
+                <div style="font-family:var(--font-mono);font-size:10px;color:var(--teal);margin-bottom:3px">GET /general/filters/{filter}</div>
+                <div style="font-size:11px;color:var(--muted)">Lista NCMs, países, blocos, vias, URFs disponíveis</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Exemplo · exportação de ferro (NCM 26011100)</div>
+            <div style="background:var(--bg3);border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 12px;font-family:var(--font-mono);font-size:10px;color:var(--text);line-height:1.7">
+              <span style="color:var(--blue)">POST</span> https://api-comexstat.mdic.gov.br/general<br><br>
+              {<br>
+              &nbsp;&nbsp;<span style="color:var(--green)">"flow"</span>: <span style="color:var(--amber)">"export"</span>,<br>
+              &nbsp;&nbsp;<span style="color:var(--green)">"monthStart"</span>: <span style="color:var(--coral)">1</span>,<br>
+              &nbsp;&nbsp;<span style="color:var(--green)">"monthEnd"</span>: <span style="color:var(--coral)">12</span>,<br>
+              &nbsp;&nbsp;<span style="color:var(--green)">"yearStart"</span>: <span style="color:var(--coral)">2020</span>,<br>
+              &nbsp;&nbsp;<span style="color:var(--green)">"yearEnd"</span>: <span style="color:var(--coral)">2024</span>,<br>
+              &nbsp;&nbsp;<span style="color:var(--green)">"details"</span>: [<span style="color:var(--amber)">"ncm"</span>, <span style="color:var(--amber)">"country"</span>, <span style="color:var(--amber)">"state"</span>],<br>
+              &nbsp;&nbsp;<span style="color:var(--green)">"filters"</span>: {<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--green)">"ncm"</span>: [<span style="color:var(--amber)">"26011100"</span>, <span style="color:var(--amber)">"26011200"</span>]<br>
+              &nbsp;&nbsp;},<br>
+              &nbsp;&nbsp;<span style="color:var(--green)">"metrics"</span>: [<span style="color:var(--amber)">"metricFOB"</span>, <span style="color:var(--amber)">"metricKG"</span>]<br>
+              }
+            </div>
+            <div style="margin-top:8px;font-size:11px;color:var(--muted);line-height:1.5">
+              Sem autenticação. Base URL: <span style="font-family:var(--font-mono);color:var(--blue)">api-comexstat.mdic.gov.br</span><br>
+              Docs: <span style="font-family:var(--font-mono);color:var(--blue)">api-comexstat.mdic.gov.br/docs</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- NCM minerais seção V -->
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line)">
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">NCMs relevantes para mineração · seção V do sistema harmonizado</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:var(--r-sm);background:var(--blue2);color:var(--blue);border:1px solid var(--blue2)">Cap. 25 · sal, enxofre, calcário, cimento</span>
+            <span style="font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:var(--r-sm);background:var(--amber2);color:var(--amber);border:1px solid var(--amber2)">Cap. 26 · minérios, escórias e cinzas</span>
+            <span style="font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:var(--r-sm);background:var(--coral2);color:var(--coral);border:1px solid var(--coral2)">Cap. 27 · combustíveis minerais, óleos</span>
+            <span style="font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:var(--r-sm);background:var(--teal2);color:var(--teal);border:1px solid var(--teal2)">2601 · minério de ferro</span>
+            <span style="font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:var(--r-sm);background:var(--green2);color:var(--green);border:1px solid var(--green2)">2603 · minério de cobre</span>
+            <span style="font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:var(--r-sm);background:var(--amber2);color:var(--amber);border:1px solid var(--amber2)">2616 · minério de ouro</span>
+            <span style="font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:var(--r-sm);background:var(--purple2);color:var(--purple);border:1px solid var(--purple2)">2615 · nióbio, tântalo, vanádio</span>
+            <span style="font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:var(--r-sm);background:var(--bg4);color:var(--muted);border:1px solid var(--line2)">2606 · minério de alumínio (bauxita)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- tabela de exportações recentes -->
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">Top exportações minerais · 2024 por NCM</span>
+          <span class="card-badge" style="color:var(--blue);border-color:var(--blue2)">ComexStat</span>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>NCM</th><th>Descrição</th><th>Destino top</th><th>Kg líquido</th><th>FOB (US$)</th><th>Tendência</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-family:var(--font-mono);font-size:11px;color:var(--text)">26011100</td>
+              <td>Minério de ferro não aglomerado</td>
+              <td>China</td>
+              <td style="font-family:var(--font-mono)">312 Mt</td>
+              <td style="font-family:var(--font-mono);color:var(--blue)">US$ 21,4 bi</td>
+              <td><span class="st st-lavra">↑ 6,2%</span></td>
+            </tr>
+            <tr>
+              <td style="font-family:var(--font-mono);font-size:11px;color:var(--text)">26160000</td>
+              <td>Minérios de metais preciosos (ouro)</td>
+              <td>EUA</td>
+              <td style="font-family:var(--font-mono)">2,8 kt</td>
+              <td style="font-family:var(--font-mono);color:var(--blue)">US$ 5,8 bi</td>
+              <td><span class="st st-lavra">↑ 14,1%</span></td>
+            </tr>
+            <tr>
+              <td style="font-family:var(--font-mono);font-size:11px;color:var(--text)">26060000</td>
+              <td>Minérios de alumínio (bauxita)</td>
+              <td>Noruega</td>
+              <td style="font-family:var(--font-mono)">48,2 Mt</td>
+              <td style="font-family:var(--font-mono);color:var(--blue)">US$ 3,1 bi</td>
+              <td><span class="st st-req">↑ 1,8%</span></td>
+            </tr>
+            <tr>
+              <td style="font-family:var(--font-mono);font-size:11px;color:var(--text)">26159000</td>
+              <td>Nióbio, tântalo, vanádio</td>
+              <td>Japão</td>
+              <td style="font-family:var(--font-mono)">134 kt</td>
+              <td style="font-family:var(--font-mono);color:var(--blue)">US$ 2,9 bi</td>
+              <td><span class="st st-lavra">↑ 9,4%</span></td>
+            </tr>
+            <tr>
+              <td style="font-family:var(--font-mono);font-size:11px;color:var(--text)">26030000</td>
+              <td>Minérios de cobre</td>
+              <td>China</td>
+              <td style="font-family:var(--font-mono)">8,4 Mt</td>
+              <td style="font-family:var(--font-mono);color:var(--blue)">US$ 4,2 bi</td>
+              <td><span class="st st-lavra">↑ 22,3%</span></td>
+            </tr>
+            <tr>
+              <td style="font-family:var(--font-mono);font-size:11px;color:var(--text)">25010010</td>
+              <td>Sal marinho e sal-gema</td>
+              <td>Argentina</td>
+              <td style="font-family:var(--font-mono)">6,1 Mt</td>
+              <td style="font-family:var(--font-mono);color:var(--blue)">US$ 312 M</td>
+              <td><span class="st st-req">↓ 2,1%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </main>
+</div>
