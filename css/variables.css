@@ -1,0 +1,44 @@
+:root {
+  --bg:    #f7f8f6;
+  --bg2:   #ffffff;
+  --bg3:   #f2f3f0;
+  --bg4:   #eaebe7;
+  --line:  rgba(0,0,0,0.07);
+  --line2: rgba(0,0,0,0.12);
+  --text:  #1a1c18;
+  --muted: #6b7166;
+  --dim:   #b0b5aa;
+
+  --green:   #1a6e3c;
+  --green2:  #c8ead7;
+  --amber:   #92560a;
+  --amber2:  #fde9c2;
+  --coral:   #b83a1f;
+  --coral2:  #fcd9d2;
+  --blue:    #1a4d8f;
+  --blue2:   #d0e2f8;
+  --purple:  #4c3db0;
+  --purple2: #e0daf8;
+  --pink:    #9a1f5e;
+  --pink2:   #fad6eb;
+  --teal:    #0f6357;
+  --teal2:   #c6ede7;
+
+  --accent:  #1a6e3c;
+
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 18px;
+
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'IBM Plex Mono', monospace;
+
+  --sidebar-w: 220px;
+  --topbar-h:  52px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 14px; }
+body { background: var(--bg); color: var(--text); font-family: var(--font-body); min-height: 100vh; overflow-x: hidden; }
