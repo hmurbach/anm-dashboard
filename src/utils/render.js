@@ -1,4 +1,8 @@
-function miniBar(chart) {
+import { DATA } from '../data/chartData.js';
+import { CORRELACOES, IMPACT_LABEL, BPILL_CLASS } from '../data/correlacoes.js';
+
+/* Mini-chart SVG helpers */
+export function miniBar(chart) {
   const rows = chart.rows;
   const max = Math.max(...rows.map(r => r.val));
   const rH = 14, pad = 2;
@@ -17,7 +21,7 @@ function miniBar(chart) {
   return `<svg width="100%" viewBox="0 0 200 ${h}">${items}</svg>`;
 }
 
-function miniLine(chart) {
+export function miniLine(chart) {
   const W = 200, H = 48;
   const allPts = chart.series.flatMap(s => s.pts);
   const minY = Math.min(...allPts), maxY = Math.max(...allPts);
@@ -41,7 +45,7 @@ function miniLine(chart) {
   return `<svg width="100%" viewBox="0 0 ${W} ${H + 16}"><g transform="translate(0,12)">${lines}${xLabels}</g><g>${legend}</g></svg>`;
 }
 
-function miniDonut(chart) {
+export function miniDonut(chart) {
   const slices = chart.slices;
   const sum = slices.reduce((a, s) => a + s.val, 0);
   const cx = 36, cy = 36, r = 28;
@@ -67,7 +71,7 @@ function miniDonut(chart) {
   return `<svg width="100%" viewBox="0 0 200 72">${paths}${hole}${legend}</svg>`;
 }
 
-function miniScatter(chart) {
+export function miniScatter(chart) {
   const W = 200, H = 76;
   const px = v => +(14 + (v / 100) * (W - 28)).toFixed(1);
   const py = v => +(H - 8 - (v / 100) * (H - 20)).toFixed(1);
@@ -85,7 +89,7 @@ function miniScatter(chart) {
   return `<svg width="100%" viewBox="0 0 ${W} ${H + 8}">${grid}${dots}${axLabels}</svg>`;
 }
 
-function renderMiniChart(chart) {
+export function renderMiniChart(chart) {
   if (!chart) return '';
   if (chart.type === 'bar')     return miniBar(chart);
   if (chart.type === 'line')    return miniLine(chart);
@@ -94,7 +98,7 @@ function renderMiniChart(chart) {
   return '';
 }
 
-function renderBars(containerId, rows) {
+export function renderBars(containerId, rows) {
   const el = document.getElementById(containerId);
   if (!el) return;
   el.innerHTML = rows.map(r => `
@@ -108,7 +112,7 @@ function renderBars(containerId, rows) {
   }, 80);
 }
 
-function renderCorrs(cat) {
+export function renderCorrs(cat) {
   const filtered = cat === 'all' ? CORRELACOES : CORRELACOES.filter(c => c.cat === cat);
   document.getElementById('corr-grid').innerHTML = filtered.map(c => `
     <div class="corr-card">
@@ -123,7 +127,7 @@ function renderCorrs(cat) {
     </div>`).join('');
 }
 
-function renderProcessos() {
+export function renderProcessos() {
   const tb = document.getElementById('proc-tbody');
   if (!tb) return;
   tb.innerHTML = DATA.processos.map(p => `

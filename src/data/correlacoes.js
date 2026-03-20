@@ -1,4 +1,4 @@
-const CORRELACOES = [
+export const CORRELACOES = [
   { cat:"fiscal",   bases:["SCM","RAL","CFEM"],   title:"Evasão fiscal por substância",       desc:"Cruza produção declarada no RAL com CFEM recolhida. Detecta sub-declaração comparando preço implícito com mercado.", key:"num_processo + ano_base + substancia", impact:"high" },
   { cat:"fiscal",   bases:["SCM","TAH"],           title:"Mapa de inadimplência TAH",          desc:"Titulares com processos ativos e TAH em aberto. Agrega por UF, substância e porte para priorizar cobrança.",       key:"num_processo + cpf_cnpj + ano",       impact:"high" },
   { cat:"fiscal",   bases:["SCM","CFEM","RAL"],    title:"Receita CFEM vs. produção física",   desc:"Compara evolução da CFEM com volume produzido no RAL. Detecta quedas de arrecadação sem queda de produção.",       key:"substancia + uf + ano_base",          impact:"high" },
@@ -25,5 +25,5 @@ const CORRELACOES = [
   { cat:"temporal", bases:["SIGBM","SCM"],          title:"Evolução do risco de barragens",     desc:"Séries históricas de classificação e DPA. Cruza com início de operação no SCM para ver se risco cresce com a idade.", key:"num_processo + data_classificacao", impact:"med"  },
 ];
 
-const IMPACT_LABEL = { high:"Alto impacto", med:"Médio impacto", low:"Exploratório" };
-const BPILL_CLASS  = { SCM:"bp-scm", SIGMINE:"bp-sig", RAL:"bp-ral", CFEM:"bp-cfem", SIGBM:"bp-sigbm", TAH:"bp-tah", DIPEM:"bp-dipem", EXT:"bp-ext" };
+export const IMPACT_LABEL = { high:"Alto impacto", med:"Médio impacto", low:"Exploratório" };
+export const BPILL_CLASS  = { SCM:"bp-scm", SIGMINE:"bp-sig", RAL:"bp-ral", CFEM:"bp-cfem", SIGBM:"bp-sigbm", TAH:"bp-tah", DIPEM:"bp-dipem", EXT:"bp-ext" };

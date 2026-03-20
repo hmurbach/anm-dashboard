@@ -1,6 +1,9 @@
+import { DATA } from '../data/chartData.js';
+import { renderBars, renderCorrs, renderProcessos } from './render.js';
+
 const SECTIONS = ['overview','correlacoes','processos','producao','arrecadacao','risco','fiscal','pesquisa','comex'];
 
-function showSection(id, el) {
+export function showSection(id, el) {
   SECTIONS.forEach(s => {
     document.getElementById('sec-' + s).style.display = s === id ? '' : 'none';
   });
@@ -15,11 +18,18 @@ function showSection(id, el) {
   if (id === 'comex')       { renderBars('bar-exp-sub', DATA.barExpSub); renderBars('bar-exp-pais', DATA.barExpPais); renderBars('bar-exp-uf', DATA.barExpUF); renderBars('bar-exp-via', DATA.barExpVia); }
 }
 
-document.getElementById('corr-tabs').addEventListener('click', e => {
-  const t = e.target.closest('.ctab');
-  if (!t) return;
-  document.querySelectorAll('.ctab').forEach(x => x.classList.remove('active'));
-  t.classList.add('active');
-  renderCorrs(t.dataset.cat);
-});
+export function initNavigation() {
+  document.querySelector('.sidebar').addEventListener('click', e => {
+    const item = e.target.closest('.nav-item[data-section]');
+    if (!item) return;
+    showSection(item.dataset.section, item);
+  });
 
+  document.getElementById('corr-tabs').addEventListener('click', e => {
+    const t = e.target.closest('.ctab');
+    if (!t) return;
+    document.querySelectorAll('.ctab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    renderCorrs(t.dataset.cat);
+  });
+}

@@ -1,0 +1,295 @@
+<div class="section" id="sec-comex" style="display:none">
+  <div class="section-header">
+    <span class="section-title">Comércio exterior mineral</span>
+    <span class="section-sub">ComexStat MDIC · exportação e importação de minerais · NCM seção V</span>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-row">
+    <div class="kpi">
+      <div class="kpi-label">Exportações minerais 2024</div>
+      <div class="kpi-value" style="color:var(--blue)">US$ 42,1 bi</div>
+      <div class="kpi-delta delta-up">↑ 8,3% vs. 2023</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:78%;background:var(--blue)"></div></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Importações minerais 2024</div>
+      <div class="kpi-value" style="color:var(--coral)">US$ 11,2 bi</div>
+      <div class="kpi-delta delta-down">↑ 3,1% vs. 2023</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:32%;background:var(--coral)"></div></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Saldo da balança mineral</div>
+      <div class="kpi-value" style="color:var(--green)">US$ 30,9 bi</div>
+      <div class="kpi-delta delta-up">Superávit · ↑ 11,2%</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:65%;background:var(--green)"></div></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Participação no total exp.</div>
+      <div class="kpi-value" style="color:var(--purple)">18,4%</div>
+      <div class="kpi-delta" style="color:var(--muted)">2º maior setor exportador</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:18%;background:var(--purple)"></div></div>
+    </div>
+  </div>
+
+  <!-- Charts row 1: exportações por substância + destinos -->
+  <div class="charts-row">
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title">Exportações por substância (FOB US$)</span>
+        <span class="card-badge" style="color:var(--blue);border-color:var(--blue2)">ComexStat · NCM</span>
+      </div>
+      <div class="bars" id="bar-exp-sub"></div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title">Principais destinos · minerais</span>
+        <span class="card-badge" style="color:var(--blue);border-color:var(--blue2)">ComexStat · país</span>
+      </div>
+      <div class="bars" id="bar-exp-pais"></div>
+    </div>
+  </div>
+
+  <!-- Charts row 2: exportação por UF + via transporte -->
+  <div class="charts-row">
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title">Exportações por UF de origem</span>
+        <span class="card-badge" style="color:var(--blue);border-color:var(--blue2)">ComexStat · SG_UF_NCM</span>
+      </div>
+      <div class="bars" id="bar-exp-uf"></div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title">Via de transporte (exportação)</span>
+        <span class="card-badge" style="color:var(--teal);border-color:var(--teal2)">ComexStat · CO_VIA</span>
+      </div>
+      <div class="bars" id="bar-exp-via"></div>
+    </div>
+  </div>
+
+  <!-- Cruzamentos ANM × COMEX -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-title">Cruzamentos ANM × ComexStat</span>
+      <span class="card-badge" style="color:var(--purple);border-color:var(--purple2)">correlações</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+
+      <div class="corr-card">
+        <div class="corr-top">
+          <div class="corr-bases">
+            <span class="bpill bp-ral">RAL</span>
+            <span class="bpill bp-cfem">CFEM</span>
+            <span class="bpill" style="color:var(--blue);border-color:var(--blue2);background:var(--blue2)">COMEX</span>
+          </div>
+          <span class="impact-badge imp-high">Alto impacto</span>
+        </div>
+        <div class="corr-title">Produção extraída vs. volume exportado</div>
+        <div class="corr-desc">Cruza volume declarado no RAL (KG_LIQUIDO) com o KG_LIQUIDO do ComexStat por NCM mineral. Detecta substâncias com alta produção e baixa exportação — possível escoamento informal ou processamento interno.</div>
+        <div class="corr-key">CO_NCM ↔ substancia_ANM + SG_UF_NCM ↔ UF_processo + ano_base</div>
+      </div>
+
+      <div class="corr-card">
+        <div class="corr-top">
+          <div class="corr-bases">
+            <span class="bpill bp-cfem">CFEM</span>
+            <span class="bpill" style="color:var(--blue);border-color:var(--blue2);background:var(--blue2)">COMEX</span>
+          </div>
+          <span class="impact-badge imp-high">Alto impacto</span>
+        </div>
+        <div class="corr-title">Preço declarado vs. preço FOB exportado</div>
+        <div class="corr-desc">CFEM é calculada sobre receita bruta. Comparando com VL_FOB ÷ KG_LIQUIDO do ComexStat, estima-se o preço de venda implícito. Divergência significativa indica sub-declaração de receita para reduzir a base de cálculo da CFEM.</div>
+        <div class="corr-key">VL_FOB / KG_LIQUIDO ↔ receita_CFEM / producao_RAL + substancia + ano</div>
+      </div>
+
+      <div class="corr-card">
+        <div class="corr-top">
+          <div class="corr-bases">
+            <span class="bpill bp-sig">SIGMINE</span>
+            <span class="bpill" style="color:var(--blue);border-color:var(--blue2);background:var(--blue2)">COMEX</span>
+          </div>
+          <span class="impact-badge imp-med">Médio impacto</span>
+        </div>
+        <div class="corr-title">Processos ativos por UF vs. fluxo de exportação</div>
+        <div class="corr-desc">Compara a densidade de processos minerários por estado (SIGMINE/SCM) com o volume de exportação mineral por UF de origem (ComexStat). Estados com muitos processos e baixa exportação revelam gargalos logísticos ou subaproveitamento.</div>
+        <div class="corr-key">SG_UF_NCM ↔ UF_processo + substancia + CO_NCM</div>
+      </div>
+
+      <div class="corr-card">
+        <div class="corr-top">
+          <div class="corr-bases">
+            <span class="bpill bp-scm">SCM</span>
+            <span class="bpill" style="color:var(--blue);border-color:var(--blue2);background:var(--blue2)">COMEX</span>
+            <span class="bpill bp-ext">EXT</span>
+          </div>
+          <span class="impact-badge imp-high">Alto impacto</span>
+        </div>
+        <div class="corr-title">Ciclos de commodities e abertura de processos</div>
+        <div class="corr-desc">Compara variação do VL_FOB exportado de uma substância ao longo dos anos com o número de novos requerimentos no SCM. Altas de preço internacional de commodities devem preceder ondas de novos requerimentos minerários.</div>
+        <div class="corr-key">VL_FOB por ano ↔ novos_processos_SCM por ano + substancia</div>
+      </div>
+
+      <div class="corr-card">
+        <div class="corr-top">
+          <div class="corr-bases">
+            <span class="bpill bp-ral">RAL</span>
+            <span class="bpill" style="color:var(--blue);border-color:var(--blue2);background:var(--blue2)">COMEX</span>
+          </div>
+          <span class="impact-badge imp-med">Médio impacto</span>
+        </div>
+        <div class="corr-title">Taxa de exportação por substância</div>
+        <div class="corr-desc">Razão entre volume exportado (ComexStat) e volume produzido (RAL) por substância e ano. Revela o grau de dependência do mercado externo de cada cadeia mineral e a evolução do beneficiamento interno ao longo do tempo.</div>
+        <div class="corr-key">KG_LIQUIDO_COMEX / KG_LIQUIDO_RAL por CO_NCM + ano</div>
+      </div>
+
+      <div class="corr-card">
+        <div class="corr-top">
+          <div class="corr-bases">
+            <span class="bpill bp-sigbm">SIGBM</span>
+            <span class="bpill" style="color:var(--blue);border-color:var(--blue2);background:var(--blue2)">COMEX</span>
+          </div>
+          <span class="impact-badge imp-med">Médio impacto</span>
+        </div>
+        <div class="corr-title">Risco de barragem e dependência exportadora</div>
+        <div class="corr-desc">Cruzando o DPA das barragens com o volume exportado pelo mesmo titular, identifica operações em que um evento de rompimento interromperia exportações estratégicas para o país — insumo para priorização de fiscalização.</div>
+        <div class="corr-key">cpf_cnpj ↔ exportador + substancia + DPA_SIGBM</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- API reference card -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-title">Referência da API ComexStat</span>
+      <span class="card-badge" style="color:var(--muted);border-color:var(--dim)">MDIC · sem autenticação</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Endpoints principais</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="background:var(--bg3);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 10px">
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--blue);margin-bottom:3px">POST /general</div>
+            <div style="font-size:11px;color:var(--muted)">Exportação/importação por NCM, país, UF, via, URF · desde 1997</div>
+          </div>
+          <div style="background:var(--bg3);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 10px">
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--blue);margin-bottom:3px">POST /cities</div>
+            <div style="font-size:11px;color:var(--muted)">Por município do exportador/importador · SH4, país, UF</div>
+          </div>
+          <div style="background:var(--bg3);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 10px">
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--blue);margin-bottom:3px">POST /historical-data</div>
+            <div style="font-size:11px;color:var(--muted)">Série histórica 1989–1996 · nomenclatura NBM</div>
+          </div>
+          <div style="background:var(--bg3);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 10px">
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--teal);margin-bottom:3px">GET /general/filters/{filter}</div>
+            <div style="font-size:11px;color:var(--muted)">Lista NCMs, países, blocos, vias, URFs disponíveis</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Exemplo · exportação de ferro (NCM 26011100)</div>
+        <div style="background:var(--bg3);border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 12px;font-family:var(--font-mono);font-size:10px;color:var(--text);line-height:1.7">
+          <span style="color:var(--blue)">POST</span> https://api-comexstat.mdic.gov.br/general<br><br>
+          {<br>
+          &nbsp;&nbsp;<span style="color:var(--green)">"flow"</span>: <span style="color:var(--amber)">"export"</span>,<br>
+          &nbsp;&nbsp;<span style="color:var(--green)">"monthStart"</span>: <span style="color:var(--coral)">1</span>,<br>
+          &nbsp;&nbsp;<span style="color:var(--green)">"monthEnd"</span>: <span style="color:var(--coral)">12</span>,<br>
+          &nbsp;&nbsp;<span style="color:var(--green)">"yearStart"</span>: <span style="color:var(--coral)">2020</span>,<br>
+          &nbsp;&nbsp;<span style="color:var(--green)">"yearEnd"</span>: <span style="color:var(--coral)">2024</span>,<br>
+          &nbsp;&nbsp;<span style="color:var(--green)">"details"</span>: [<span style="color:var(--amber)">"ncm"</span>, <span style="color:var(--amber)">"country"</span>, <span style="color:var(--amber)">"state"</span>],<br>
+          &nbsp;&nbsp;<span style="color:var(--green)">"filters"</span>: {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--green)">"ncm"</span>: [<span style="color:var(--amber)">"26011100"</span>, <span style="color:var(--amber)">"26011200"</span>]<br>
+          &nbsp;&nbsp;},<br>
+          &nbsp;&nbsp;<span style="color:var(--green)">"metrics"</span>: [<span style="color:var(--amber)">"metricFOB"</span>, <span style="color:var(--amber)">"metricKG"</span>]<br>
+          }
+        </div>
+        <div style="margin-top:8px;font-size:11px;color:var(--muted);line-height:1.5">
+          Sem autenticação. Base URL: <span style="font-family:var(--font-mono);color:var(--blue)">api-comexstat.mdic.gov.br</span><br>
+          Docs: <span style="font-family:var(--font-mono);color:var(--blue)">api-comexstat.mdic.gov.br/docs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- NCM minerais seção V -->
+    <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line)">
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">NCMs relevantes para mineração · seção V do sistema harmonizado</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <span style="font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:var(--r-sm);background:var(--blue2);color:var(--blue);border:1px solid var(--blue2)">Cap. 25 · sal, enxofre, calcário, cimento</span>
+        <span style="font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:var(--r-sm);background:var(--amber2);color:var(--amber);border:1px solid var(--amber2)">Cap. 26 · minérios, escórias e cinzas</span>
+        <span style="font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:var(--r-sm);background:var(--coral2);color:var(--coral);border:1px solid var(--coral2)">Cap. 27 · combustíveis minerais, óleos</span>
+        <span style="font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:var(--r-sm);background:var(--teal2);color:var(--teal);border:1px solid var(--teal2)">2601 · minério de ferro</span>
+        <span style="font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:var(--r-sm);background:var(--green2);color:var(--green);border:1px solid var(--green2)">2603 · minério de cobre</span>
+        <span style="font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:var(--r-sm);background:var(--amber2);color:var(--amber);border:1px solid var(--amber2)">2616 · minério de ouro</span>
+        <span style="font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:var(--r-sm);background:var(--purple2);color:var(--purple);border:1px solid var(--purple2)">2615 · nióbio, tântalo, vanádio</span>
+        <span style="font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:var(--r-sm);background:var(--bg4);color:var(--muted);border:1px solid var(--line2)">2606 · minério de alumínio (bauxita)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- tabela de exportações recentes -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-title">Top exportações minerais · 2024 por NCM</span>
+      <span class="card-badge" style="color:var(--blue);border-color:var(--blue2)">ComexStat</span>
+    </div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>NCM</th><th>Descrição</th><th>Destino top</th><th>Kg líquido</th><th>FOB (US$)</th><th>Tendência</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-family:var(--font-mono);font-size:11px;color:var(--text)">26011100</td>
+          <td>Minério de ferro não aglomerado</td>
+          <td>China</td>
+          <td style="font-family:var(--font-mono)">312 Mt</td>
+          <td style="font-family:var(--font-mono);color:var(--blue)">US$ 21,4 bi</td>
+          <td><span class="st st-lavra">↑ 6,2%</span></td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--font-mono);font-size:11px;color:var(--text)">26160000</td>
+          <td>Minérios de metais preciosos (ouro)</td>
+          <td>EUA</td>
+          <td style="font-family:var(--font-mono)">2,8 kt</td>
+          <td style="font-family:var(--font-mono);color:var(--blue)">US$ 5,8 bi</td>
+          <td><span class="st st-lavra">↑ 14,1%</span></td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--font-mono);font-size:11px;color:var(--text)">26060000</td>
+          <td>Minérios de alumínio (bauxita)</td>
+          <td>Noruega</td>
+          <td style="font-family:var(--font-mono)">48,2 Mt</td>
+          <td style="font-family:var(--font-mono);color:var(--blue)">US$ 3,1 bi</td>
+          <td><span class="st st-req">↑ 1,8%</span></td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--font-mono);font-size:11px;color:var(--text)">26159000</td>
+          <td>Nióbio, tântalo, vanádio</td>
+          <td>Japão</td>
+          <td style="font-family:var(--font-mono)">134 kt</td>
+          <td style="font-family:var(--font-mono);color:var(--blue)">US$ 2,9 bi</td>
+          <td><span class="st st-lavra">↑ 9,4%</span></td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--font-mono);font-size:11px;color:var(--text)">26030000</td>
+          <td>Minérios de cobre</td>
+          <td>China</td>
+          <td style="font-family:var(--font-mono)">8,4 Mt</td>
+          <td style="font-family:var(--font-mono);color:var(--blue)">US$ 4,2 bi</td>
+          <td><span class="st st-lavra">↑ 22,3%</span></td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--font-mono);font-size:11px;color:var(--text)">25010010</td>
+          <td>Sal marinho e sal-gema</td>
+          <td>Argentina</td>
+          <td style="font-family:var(--font-mono)">6,1 Mt</td>
+          <td style="font-family:var(--font-mono);color:var(--blue)">US$ 312 M</td>
+          <td><span class="st st-req">↓ 2,1%</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

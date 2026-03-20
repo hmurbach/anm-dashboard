@@ -1,4 +1,4 @@
-const DATA = {
+export const DATA = {
   barSubs: [
     { lbl:"Ouro",    val:88, color:"#d4860f", num:"42.180" },
     { lbl:"Ferro",   val:72, color:"#1a4d8f", num:"34.560" },
